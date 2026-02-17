@@ -1,0 +1,257 @@
+{
+  "lecture_title": "Understanding CPU Scheduling Algorithms",
+  "slides": [
+    {
+      "heading": "Introduction to CPU Scheduling",
+      "summary": "CPU scheduling is the process of deciding which process gets to use the CPU when multiple processes are ready. It's crucial for system performance in multiprogramming environments.",
+      "important_points": [
+        "Multiple processes in main memory",
+        "CPU executes one process at a time",
+        "Decision-making process: CPU Scheduling",
+        "Directly affects system performance"
+      ],
+      "script": "Hello everyone! Welcome to our lecture on CPU Scheduling Algorithms. In today's session, we will explore a very fundamental concept in operating systems: how the Central Processing Unit, or CPU, manages to execute multiple tasks efficiently. Now let us understand what CPU scheduling truly means. In a modern operating system, especially with the multiprogramming function, we often have many processes present in the main memory simultaneously, all waiting for their turn to be executed. However, the CPU, our main processing unit, can only execute one process at any given moment. This creates a need for a decision-making process: which process should the CPU execute next? This critical decision-making is what we call CPU Scheduling. This is very important because an efficient CPU scheduling mechanism is vital. It ensures that our CPU remains busy and that system resources are utilized optimally, directly impacting the overall performance and responsiveness of our computer system. We will dive deep into various algorithms that govern this process.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_1.mp3",
+      "duration_seconds": 70.464,
+      "slide_id": 1
+    },
+    {
+      "heading": "Need for CPU Scheduling and the CPU Scheduler",
+      "summary": "CPU scheduling is essential for managing multiple processes, improving CPU utilization, and enhancing overall system performance. The CPU Scheduler is the OS component responsible for selecting the next process.",
+      "important_points": [
+        "Manages Multiple Processes with a Single CPU",
+        "Improves CPU Utilization and System Performance",
+        "Ensures Efficient Resource Management",
+        "CPU Scheduler: Selects and allocates processes",
+        "Scheduler functions: Select, Allocate, Decide based on algorithm"
+      ],
+      "script": "Now, let us delve a bit deeper into why CPU scheduling is so crucial and what component of the operating system handles it. The need for CPU scheduling arises from several factors. Firstly, as we just discussed, there are often multiple processes ready to run, but only a single CPU available to execute them. Secondly, it is necessary for improved CPU utilization. Without proper scheduling, the CPU might sit idle, even if there are tasks waiting. Thirdly, effective scheduling leads to better overall system performance and ensures efficient resource management.  So, who makes these important decisions? This task falls upon the CPU Scheduler. The CPU Scheduler is a dedicated part of the operating system that is responsible for selecting one process at a time from a queue of ready processes and then allocating the CPU to that selected process. Its key functions include: selecting the next process to be executed, allocating the CPU to that chosen process, and making these scheduling decisions based on a specific algorithm. We will explore several of these algorithms today.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_2.mp3",
+      "duration_seconds": 71.544,
+      "slide_id": 2
+    },
+    {
+      "heading": "Types of CPU Scheduling Algorithms",
+      "summary": "CPU scheduling algorithms are categorized into two main types: Non-Pre-emptive, where a process runs to completion, and Pre-emptive, where a running process can be interrupted.",
+      "important_points": [
+        "Non-Pre-emptive Scheduling: Process runs until completion",
+        "Examples: FCFS, Non-pre-emptive SJF, Non-pre-emptive Priority",
+        "Pre-emptive Scheduling: Running process can be interrupted",
+        "Examples: Round Robin, Pre-emptive SJF (SRTF), Pre-emptive Priority"
+      ],
+      "script": "As we move forward, it is important to understand that CPU scheduling algorithms are broadly divided into two main types, based on how they handle a process once it starts executing on the CPU. The first type is called Non-Pre-emptive Scheduling. In this approach, once a process is assigned to the CPU, it continues to run without interruption. It only stops when its current task is completely finished. For example, the First Come First Serve, or FCFS, algorithm, as well as the non-pre-emptive versions of Shortest Job First and Priority Scheduling, fall into this category. The second type is Pre-emptive Scheduling. This is different because a running process can be stopped in between its execution, effectively 'pre-empted,' and then moved back to the queue, allowing another process to take over the CPU. Common examples of pre-emptive algorithms include Round Robin, the pre-emptive version of Shortest Job First, also known as SRTF, and pre-emptive Priority Scheduling. This distinction is very important as it defines the core behavior of how processes are managed.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_3.mp3",
+      "duration_seconds": 67.368,
+      "slide_id": 3
+    },
+    {
+      "heading": "First Come First Serve (FCFS) Scheduling",
+      "summary": "FCFS is the simplest non-pre-emptive scheduling algorithm, executing processes in the order of their arrival, following a FIFO queue principle.",
+      "important_points": [
+        "Simplest CPU scheduling algorithm",
+        "Non-pre-emptive: process runs to completion",
+        "Follows FIFO (First In First Out) principle",
+        "No priority involved, solely based on arrival time"
+      ],
+      "script": "Now, let us understand our first specific scheduling algorithm: First Come First Serve, or FCFS. As its name clearly suggests, FCFS is indeed the simplest and easiest CPU scheduling algorithm to grasp and implement. It operates on a very straightforward principle: the processes that arrive first in the queue are the ones executed first by the CPU. Think of it like a waiting line, such as in a bank or a grocery store. The first person to arrive is the first person to be served. This scheduling method strictly follows the principle of a FIFO, or First In First Out, queue. Furthermore, FCFS is a non-pre-emptive algorithm. This means that once a process begins execution, it will continue uninterrupted until its current work is entirely completed. Only then will the CPU move on to the next process in the queue. There is no concept of priority in FCFS scheduling; arrival order is the sole determinant.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_4.mp3",
+      "duration_seconds": 60.504,
+      "slide_id": 4
+    },
+    {
+      "heading": "Working Principle and Characteristics of FCFS",
+      "summary": "FCFS processes arrive, are queued by arrival time, and are executed sequentially to completion. It is simple, non-pre-emptive, and uses a FIFO queue.",
+      "important_points": [
+        "Processes arrive and are ordered by arrival time",
+        "CPU scheduler selects the first process in queue",
+        "Selected process executes until completion",
+        "Next process in queue gets CPU after current one finishes",
+        "Characteristics: Non-pre-emptive, uses FIFO, simple"
+      ],
+      "script": "Let us explore the working principle of FCFS scheduling in a step-by-step manner. Its operation is very simple. First, processes arrive in the system. Second, they are placed into a queue strictly in the order of their arrival time. Third, the CPU scheduler then selects the process that is at the very beginning of this queue. Fourth, the selected process begins to execute and continues running until it reaches completion. And finally, after that process completes, the very next process in the queue automatically gets its turn on the CPU. This cycle continues until all processes are executed. In terms of characteristics, as we mentioned, FCFS is a non-pre-emptive scheduling algorithm. It strictly uses the FIFO queue technique, making it very straightforward. It is simple and easy to understand, making it an excellent starting point for learning about scheduling. However, it can show poor performance in systems that rely heavily on precise time management.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_5.mp3",
+      "duration_seconds": 63.168,
+      "slide_id": 5
+    },
+    {
+      "heading": "Advantages and Disadvantages of FCFS",
+      "summary": "FCFS is simple and fair, suitable for batch systems. However, it suffers from the Convoy Effect, leading to high waiting times and poor response, especially in time-sharing systems.",
+      "important_points": [
+        "Advantages: Simple, easy to implement, fair, suitable for batch systems",
+        "Disadvantages: Convoy Effect, high average waiting time, poor response time",
+        "Not suitable for time-sharing or interactive systems",
+        "Inefficient CPU utilization due to convoy effect"
+      ],
+      "script": "Every algorithm has its strengths and weaknesses, and FCFS is no exception. Let's look at its advantages and disadvantages. The advantages of FCFS scheduling are quite clear: it is simple and easy to understand, which also makes it easy to implement. It is considered fair in nature because processes are served strictly in the order they arrive, and it is generally suitable for batch systems where performance might not be the absolute highest priority. However, FCFS has several significant disadvantages. The most notable is what we call the 'Convoy Effect.' This occurs when a short process gets stuck behind a very long process, causing it to wait unnecessarily for an extended period. This leads to a high average waiting time for all processes and a poor response time, especially for short tasks. Consequently, FCFS is not suitable for time-sharing systems or interactive systems where users expect quick feedback. It can also lead to inefficient CPU utilization if a short process is stuck behind a long one. Due to these disadvantages, FCFS is often replaced by more efficient algorithms in modern operating systems.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_6.mp3",
+      "duration_seconds": 73.152,
+      "slide_id": 6
+    },
+    {
+      "heading": "Shortest Job First (SJF) Scheduling",
+      "summary": "SJF selects the process with the minimum burst time, aiming to minimize average waiting time. It can be non-pre-emptive or pre-emptive (SRTF) and is considered optimal.",
+      "important_points": [
+        "Selects process with minimum burst time",
+        "Main objective: Minimize average waiting time",
+        "Can be Non-pre-emptive SJF or Pre-emptive SJF (SRTF)",
+        "Considered the most optimal for average waiting time"
+      ],
+      "script": "Now, let us move to our next algorithm, which is called Shortest Job First, or SJF. This algorithm takes a different approach compared to FCFS. In SJF, the CPU scheduler selects the task or process that has the minimum 'burst time.' The burst time is the amount of time a process needs for CPU execution. The main objective of SJF scheduling is very clear and very important: to minimize the average waiting time of processes. SJF scheduling can be implemented in two ways: there's a non-pre-emptive version, which is simply called Non-pre-emptive SJF, and a pre-emptive version, which is also known as Shortest Remaining Time First, or SRTF. This algorithm is widely considered to be the most optimal among all CPU scheduling algorithms, especially with respect to achieving the minimum average waiting time. This makes it theoretically very attractive.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_7.mp3",
+      "duration_seconds": 56.544,
+      "slide_id": 7
+    },
+    {
+      "heading": "Working Principle and Types of SJF",
+      "summary": "SJF queues processes, checks burst times, and executes the shortest one. In pre-emptive SJF (SRTF), a running process can be interrupted if a new, shorter process arrives.",
+      "important_points": [
+        "Processes enter queue",
+        "CPU scheduler checks burst time of all processes",
+        "Process with minimum burst time selected first",
+        "FCFS used for tie-breaking if burst times are equal",
+        "Non-pre-emptive SJF: Runs to completion",
+        "Pre-emptive SJF (SRTF): Interrupts if new shorter process arrives"
+      ],
+      "script": "Let's explore the working principle of SJF scheduling. First, all processes enter the ready queue. Next, the CPU scheduler carefully checks the burst time of all the processes currently in that queue. Then, the process with the minimum burst time is selected first for execution. What happens if two processes have the exact same burst time? In such a scenario, FCFS, or First Come First Serve, is used as a tie-breaker. The selected process then runs until its completion in the non-pre-emptive mode. Now, let us look at the two types of SJF in more detail. In Non-pre-emptive SJF, once a process begins execution, it cannot be interrupted; it runs entirely to completion. The CPU is allocated to the process with the smallest burst time among the available ones. However, in Pre-emptive SJF, also known as Shortest Remaining Time First or SRTF, a currently running process can indeed be interrupted if a new process arrives with an even smaller burst time remaining. While more efficient, pre-emptive SJF is generally harder to implement due to the constant checking for new, shorter processes.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_8.mp3",
+      "duration_seconds": 72.6,
+      "slide_id": 8
+    },
+    {
+      "heading": "Characteristics, Advantages, and Disadvantages of SJF",
+      "summary": "SJF minimizes average waiting time and improves throughput but requires accurate burst time prediction, which is difficult, making it less suitable for real-time and interactive systems.",
+      "important_points": [
+        "Characteristics: Pre-emptive or non-pre-emptive, minimizes average waiting time, requires burst time knowledge",
+        "Advantages: Minimum average waiting time, improved throughput, efficient CPU utilization",
+        "Disadvantages: Requires accurate burst time prediction (difficult), hard to implement in real-time, not suitable for interactive systems",
+        "Applications: Batch processing, offline environments"
+      ],
+      "script": "Now, let's summarize the characteristics, advantages, and disadvantages of the Shortest Job First algorithm. Its key characteristics include the fact that it can be either pre-emptive or non-pre-emptive, its primary goal is to minimize average waiting time, and it crucially requires knowledge of the burst time of processes in advance. The advantages of SJF are very compelling. It guarantees the minimum average waiting time among all scheduling algorithms, which leads to improved throughput and efficient CPU utilization. It is generally suitable for batch systems where all job details are known beforehand. However, SJF also comes with significant disadvantages. The biggest challenge is that it requires accurate burst time prediction, which is often difficult to achieve in real-time systems. Predicting how long a process will run before it starts is not always feasible. This difficulty makes it hard to implement in dynamic real-time environments and generally not suitable for interactive systems where processes arrive unpredictably. For example, if a user clicks something, we don't know the exact burst time in advance. Thus, while theoretically optimal, its practical application is limited where execution times aren't known.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_9.mp3",
+      "duration_seconds": 76.32,
+      "slide_id": 9
+    },
+    {
+      "heading": "Round Robin (RR) Scheduling",
+      "summary": "Round Robin is a pre-emptive, time-sharing algorithm that assigns a fixed 'Time Quantum' to each process, ensuring fairness by giving every process equal CPU opportunity.",
+      "important_points": [
+        "Pre-emptive CPU scheduling algorithm",
+        "Designed for time-sharing systems",
+        "Assigns a fixed 'Time Quantum' to each process",
+        "Ensures fairness; every process gets equal opportunity",
+        "Uses a circular queue for ready processes"
+      ],
+      "script": "Next, we will discuss the Round Robin, or RR, scheduling algorithm. This is a very widely used and important algorithm, especially in modern operating systems. Round Robin is a pre-emptive CPU scheduling algorithm, meaning processes can be interrupted, and it is primarily designed for time-sharing systems. The core idea behind Round Robin is quite elegant: each process is assigned a fixed, small unit of time known as a 'Time Quantum.' If a process completes its execution within its allotted time quantum, it simply finishes and leaves the CPU. However, if a process does not complete within the given time quantum, it is then pre-empted, meaning it is interrupted, and moved to the end of the ready queue. It will then wait for its next turn. This mechanism ensures fairness, as every process gets an equal opportunity to execute on the CPU for a short period, preventing any single process from monopolizing the processor.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_10.mp3",
+      "duration_seconds": 59.4,
+      "slide_id": 10
+    },
+    {
+      "heading": "Working Principle and Time Quantum in RR",
+      "summary": "RR uses a ready queue, processes execute for one time quantum, then either finish or return to the end of the queue. The Time Quantum's size significantly impacts performance.",
+      "important_points": [
+        "Processes placed in ready queue (circular)",
+        "CPU scheduler selects first process",
+        "Process executes for one time quantum",
+        "If process finishes, it leaves; if not, it's pre-empted and moved to queue end",
+        "Time Quantum: Small time allotted for CPU execution",
+        "Optimal Time Quantum is essential: Too small = high overhead; Too large = FCFS-like behavior"
+      ],
+      "script": "Let us break down the working principle of Round Robin scheduling step by step. First, all processes are placed into what is typically a circular ready queue. Then, the CPU scheduler selects the very first process from this queue. The selected process then executes for a time period exactly equal to the predefined Time Quantum. What happens next depends on the process itself: if the process finishes before its time quantum expires, it simply leaves the system. However, if the process does not finish within its allocated time, it is pre-empted and immediately added to the end of the ready queue, awaiting its next turn. This cycle continues until all processes have completed their execution. This brings us to a very important concept: the Time Quantum. This is a small, fixed amount of time allotted to each process for its execution by the CPU. Choosing an optimal time quantum is absolutely essential for good system performance. If the time quantum is too small, it leads to high context switching overhead, as the CPU spends too much time switching between processes rather than executing them. Conversely, if the time quantum is too large, Round Robin can start to behave much like FCFS, losing its pre-emptive and fairness benefits. This is very important to consider when designing a system.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_11.mp3",
+      "duration_seconds": 83.88,
+      "slide_id": 11
+    },
+    {
+      "heading": "Characteristics, Advantages, and Disadvantages of RR",
+      "summary": "RR is pre-emptive, fair, and suitable for interactive systems with good response time. However, it incurs high context switching overhead, and its performance depends on the time quantum.",
+      "important_points": [
+        "Characteristics: Pre-emptive, uses circular queue, fair CPU allocation, suitable for interactive systems, relatively low response time",
+        "Advantages: Fair CPU allocation, suitable for time-sharing systems, better response time",
+        "Disadvantages: High context switching overhead, performance depends heavily on time quantum, not suitable for batch systems",
+        "Applications: Time-sharing OS, multi-user systems, interactive environments"
+      ],
+      "script": "Let's summarize the characteristics, advantages, and disadvantages of Round Robin scheduling. Its key characteristics are that it is a pre-emptive scheduling algorithm and it typically uses a circular queue to manage processes. It ensures fair allocation of the CPU among all processes and is particularly well-suited for interactive systems due to its relatively low response time. The advantages of Round Robin include its fair CPU allocation, which means no single process is starved of CPU time. It is highly suitable for time-sharing operating systems and generally provides a better response time for users. However, RR also has its disadvantages. The most significant is the high context switching overhead, especially if the time quantum is too small, as the CPU frequently switches between tasks. Its performance depends heavily on the chosen time quantum; an inappropriate value can degrade system efficiency. It is also generally not suitable for batch systems, where overall throughput might be prioritized over quick response times. For example, Round Robin is widely applied in time-sharing operating systems, multi-user systems, and interactive environments.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_12.mp3",
+      "duration_seconds": 74.904,
+      "slide_id": 12
+    },
+    {
+      "heading": "Priority Scheduling Algorithm",
+      "summary": "Priority scheduling assigns the CPU based on process priority values, with higher-priority processes executing first. It can be pre-emptive or non-pre-emptive.",
+      "important_points": [
+        "CPU assigned based on priority value",
+        "Each process assigned a priority",
+        "Highest priority process executed first",
+        "Lower priority number often indicates higher priority",
+        "Can be pre-emptive or non-pre-emptive"
+      ],
+      "script": "Now, let us discuss our final algorithm for today: the Priority Scheduling Algorithm. This algorithm operates on a very intuitive principle. In Priority Scheduling, the CPU is assigned to processes based on a specific priority value associated with each process. Essentially, each process is given a priority, and the process with the highest priority is the one executed first by the CPU. This is very important. It's also worth noting that in many systems, a lower numerical value for the priority actually indicates a higher priority. For example, a process with priority '1' might be considered more important than a process with priority '5'. A significant feature of Priority Scheduling is its flexibility: it can be implemented in both pre-emptive and non-pre-emptive modes. This algorithm is widely used in systems where certain processes are inherently more important or critical than others, making it a powerful tool for managing diverse workloads.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_13.mp3",
+      "duration_seconds": 60.816,
+      "slide_id": 13
+    },
+    {
+      "heading": "Working Principle and Types of Priority Scheduling",
+      "summary": "Processes are queued by priority, and the highest-priority process is selected. Non-pre-emptive priority runs to completion, while pre-emptive priority allows interruption by higher-priority arrivals.",
+      "important_points": [
+        "Each process assigned a priority value",
+        "Processes placed in queue according to priority",
+        "CPU scheduler selects highest priority process",
+        "FCFS used for tie-breaking if priorities are equal",
+        "Non-Pre-emptive Priority: Runs to completion",
+        "Pre-emptive Priority: Interrupts if higher-priority process arrives"
+      ],
+      "script": "Let us examine the working principle of Priority Scheduling. First, each process is assigned a specific priority value. Then, all processes are placed in the ready queue, organized according to their priority value. The CPU scheduler's job is to select the process that possesses the highest priority for execution. If, by chance, two processes happen to have the exact same priority value, FCFS, or First Come First Serve, is typically used as a tie-breaker mechanism to decide which one runs first. The selected process then executes either until completion, which is the non-pre-emptive mode, or until a new, higher-priority process arrives, which describes the pre-emptive mode. To clarify the types, in Non-Pre-emptive Priority Scheduling, once a process starts executing, it cannot be interrupted. The CPU is allocated to the highest-priority process in the queue. In contrast, Pre-emptive Priority Scheduling allows a currently running process to be interrupted if a new process arrives with an even higher priority. This pre-emptive version is often used in real-time and critical systems where immediate response to high-priority events is essential.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_14.mp3",
+      "duration_seconds": 73.392,
+      "slide_id": 14
+    },
+    {
+      "heading": "Starvation Problem and Aging in Priority Scheduling",
+      "summary": "A major issue in Priority Scheduling is 'starvation,' where low-priority processes endlessly wait. 'Aging' is a solution that gradually increases a process's priority over time.",
+      "important_points": [
+        "Starvation: Low-priority processes wait indefinitely for CPU",
+        "Caused by continuous arrival of high-priority processes",
+        "Solution: Aging technique",
+        "Aging: Gradually increases priority of waiting processes",
+        "Ensures every process eventually gets CPU"
+      ],
+      "script": "One very important problem associated with Priority Scheduling is known as 'Starvation.' Now let us understand this problem. Starvation occurs when a low-priority process waits for an excessively long time, perhaps even indefinitely, because of a continuous stream of high-priority processes that are constantly being executed by the CPU. Imagine a very important emergency room; if critical patients keep arriving, a patient with a minor issue might never be seen. This is a significant disadvantage. Fortunately, there is a common solution to this problem: it's called 'Aging.' Aging is a technique in which the priority of a process is gradually increased the longer it waits in the queue. For example, a process might start with a priority of 10, but after 5 minutes of waiting, its priority might increase to 9, then to 8, and so on, making it more 'important' over time. This mechanism ensures that every process, regardless of its initial low priority, eventually gets its turn on the CPU, preventing it from starving indefinitely. Aging helps to balance the benefits of priority with the need for fairness.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_15.mp3",
+      "duration_seconds": 70.248,
+      "slide_id": 15
+    },
+    {
+      "heading": "Characteristics, Advantages, and Disadvantages of Priority Scheduling",
+      "summary": "Priority scheduling is flexible and suits real-time systems by executing important processes first. However, it can cause starvation and complex priority assignments.",
+      "important_points": [
+        "Characteristics: Pre-emptive or non-pre-emptive, based on process importance, flexible",
+        "Advantages: Important processes execute first, flexible, suitable for real-time systems, efficient resource utilization",
+        "Disadvantages: Starvation problem, complex priority assignment, low-priority processes may suffer",
+        "Applications: Real-time, embedded, military/defense systems, operating systems"
+      ],
+      "script": "Let's summarize the characteristics, advantages, and disadvantages of Priority Scheduling. Its key characteristics are that it can be implemented as either pre-emptive or non-pre-emptive, it is fundamentally based on the importance of processes, and it is a highly flexible scheduling technique. The advantages are clear: important processes are guaranteed to execute first, making it very suitable for real-time and critical systems. It offers flexible scheduling to adapt to different system needs and can lead to efficient resource utilization by focusing on critical tasks. However, it also has notable disadvantages. As we just discussed, the 'starvation problem' is a significant concern for low-priority processes. Also, assigning priorities can be complex and challenging, especially in dynamic environments, and if not managed well, low-priority processes may suffer significantly. Despite these drawbacks, Priority Scheduling is widely used in real-time systems, embedded systems, military and defense systems, and many operating systems where certain tasks are truly mission-critical. It helps all important tasks to be executed first, often overriding the benefits of other algorithms in such critical scenarios.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_16.mp3",
+      "duration_seconds": 76.896,
+      "slide_id": 16
+    },
+    {
+      "heading": "Conclusion and Recap of CPU Scheduling",
+      "summary": "CPU scheduling is essential for efficient operating systems. Different algorithms (FCFS, SJF, RR, Priority) serve various system needs, and choosing the right one ensures fair allocation, reduced waiting times, and better responsiveness.",
+      "important_points": [
+        "CPU scheduling is crucial for OS efficiency and performance",
+        "Algorithms: FCFS, SJF, Round Robin, Priority",
+        "FCFS: Simple, FIFO, non-pre-emptive, prone to convoy effect",
+        "SJF: Optimal for waiting time, requires burst time, can be pre-emptive (SRTF)",
+        "Round Robin: Pre-emptive, time-sharing, uses time quantum, ensures fairness, high context switch",
+        "Priority: Based on importance, can be pre-emptive, prone to starvation (solution: aging)",
+        "Choosing the right algorithm is key for system responsiveness"
+      ],
+      "script": "Let us recap everything we have learned today and conclude our discussion on CPU scheduling. CPU scheduling is undeniably very important for making an operating system work better and more efficiently. We've explored how multiple processes vying for a single CPU necessitate a smart decision-making mechanism. We discussed four primary scheduling algorithms today. First, we looked at First Come First Serve, or FCFS, which is simple, follows FIFO, and is non-pre-emptive, but suffers from the convoy effect. Then, we understood Shortest Job First, or SJF, which is optimal for minimizing waiting time but requires prior knowledge of burst times. We then examined Round Robin, or RR, a pre-emptive algorithm crucial for time-sharing systems, emphasizing the importance of its time quantum. Finally, we learned about Priority Scheduling, where processes are executed based on their importance, addressing the starvation problem with aging. Different scheduling algorithms are defined to work with different system needs. Choosing an appropriate scheduling algorithm ensures fair CPU allocation, reduces waiting times, and leads to better system responsiveness. Thank you for your attention.",
+      "audio_url": "/files/audio/0f2544dc-a193-41a9-b307-46e34585edf4_slide_17.mp3",
+      "duration_seconds": 75.936,
+      "slide_id": 17
+    }
+  ]
+}
