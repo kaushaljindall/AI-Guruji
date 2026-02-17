@@ -1,0 +1,6 @@
+Starting installation... 
+Found venv python. 
+Downloading FFmpeg from https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.zip...
+
+Download failed: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1007)>
+Done. 
