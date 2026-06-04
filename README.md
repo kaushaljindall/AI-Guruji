@@ -40,13 +40,11 @@ Imagine uploading a complex physics paper and having a virtual professor explain
 
 ## 🏗️ Architecture
 
-<div align="center">
+<!-- <div align="center">
   <img src="assets/Architecture.png" alt="Architecture Diagram" width="100%" />
-</div>
+</div> -->
 
-<br>
-
-## 🛠️ Tech Stack
+<!-- ## 🛠️ Tech Stack
 
 ### Backend
 *   **Core**: `FastAPI` (Python)
@@ -114,7 +112,7 @@ AI_Guruji/
 
 ---
 
-<div align="center">
+<div align="center"> -->
 
 ## 📜 License
 This project is protected under the **MIT License**. View the [LICENSE](LICENSE) file for more information.
